@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <div className="heading">
-        <h2>Inventory Stats</h2>
+        <h1 style={{ color: "white" }}>Inventory Stats</h1>
         <NavBar
           isUserPresent={isUserPresent}
           setIsUserPresent={setIsUserPresent}

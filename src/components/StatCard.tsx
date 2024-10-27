@@ -4,12 +4,20 @@ import { StatCardProps } from "../interfaces/interface";
 
 export const StatCard: React.FC<StatCardProps> = ({ title, value }) => {
   return (
-    <Card>
+    <Card
+      sx={{
+        height: "100px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        backgroundColor: "#193920",
+      }}
+    >
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="body2" component="div" color="white">
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="h4" color="white" fontWeight="fontWeightBold">
           {value}
         </Typography>
       </CardContent>

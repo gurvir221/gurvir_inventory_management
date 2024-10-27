@@ -122,15 +122,81 @@ const InventoryTable: React.FC<ProductTableProps> = ({
   return (
     <>
       <TableContainer component={Paper}>
-        <Table>
+        <Table style={{ backgroundColor: "navajowhite" }}>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Category</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Value</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell>
+                <span
+                  style={{
+                    color: "yellow",
+                    backgroundColor: "black",
+                    borderRadius: 4,
+                    padding: "4px 8px",
+                  }}
+                >
+                  Name
+                </span>
+              </TableCell>
+              <TableCell>
+                <span
+                  style={{
+                    color: "yellow",
+                    backgroundColor: "black",
+                    borderRadius: 4,
+                    padding: "4px 8px",
+                  }}
+                >
+                  Category
+                </span>
+              </TableCell>
+              <TableCell>
+                <span
+                  style={{
+                    color: "yellow",
+                    backgroundColor: "black",
+                    borderRadius: 4,
+                    padding: "4px 8px",
+                  }}
+                >
+                  Price
+                </span>
+              </TableCell>
+              <TableCell>
+                <span
+                  style={{
+                    color: "yellow",
+                    backgroundColor: "black",
+                    borderRadius: 4,
+                    padding: "4px 8px",
+                  }}
+                >
+                  Quantity
+                </span>
+              </TableCell>
+              <TableCell>
+                <span
+                  style={{
+                    color: "yellow",
+                    backgroundColor: "black",
+                    borderRadius: 4,
+                    padding: "4px 8px",
+                  }}
+                >
+                  Value
+                </span>
+              </TableCell>
+              <TableCell>
+                <span
+                  style={{
+                    color: "yellow",
+                    backgroundColor: "black",
+                    borderRadius: 4,
+                    padding: "4px 8px",
+                  }}
+                >
+                  Action
+                </span>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -196,7 +262,9 @@ const InventoryTable: React.FC<ProductTableProps> = ({
                         }}
                       />
                     </IconButton>
-                    <IconWrapper marked={crossedEyeIcons[index]}>
+                    <IconWrapper
+                      marked={!isUserPresent && crossedEyeIcons[index]}
+                    >
                       <IconButton
                         onClick={() => handleDisableIcon(index)}
                         disabled={isUserPresent}

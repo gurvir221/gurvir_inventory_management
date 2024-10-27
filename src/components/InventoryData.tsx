@@ -1,11 +1,11 @@
 import React from "react";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { ProductDataProps } from "../interfaces/interface";
 import { StatCard } from "./StatCard";
 import "../styles/InventoryData.scss";
 
 const InventoryData: React.FC<ProductDataProps> = ({ productData }) => {
-  const totalProduct = productData.length;
+  const totalProduct = productData ? productData.length : 0;
 
   const totalStoreValue =
     productData &&
@@ -25,7 +25,7 @@ const InventoryData: React.FC<ProductDataProps> = ({ productData }) => {
     .size;
 
   const cardMap = {
-    "Total Product": totalProduct,
+    "Total Product:": totalProduct,
     "Total Store Value:": totalStoreValue,
     "Out of Stocks:": outOfStocks,
     "No of category:": noOfCategory,
@@ -35,7 +35,7 @@ const InventoryData: React.FC<ProductDataProps> = ({ productData }) => {
     <div className="inventory-data">
       <Grid container spacing={2}>
         {Object.entries(cardMap).map(([title, value]) => (
-          <Grid key={title}>
+          <Grid key={title} item xs={12} sm={6} md={3}>
             <StatCard title={title} value={value} />
           </Grid>
         ))}
