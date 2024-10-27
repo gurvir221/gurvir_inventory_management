@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, FormControlLabel, Typography } from "@mui/material";
+import { Switch, FormControlLabel } from "@mui/material";
 
 interface NavBarProps {
   isUserPresent: boolean;
