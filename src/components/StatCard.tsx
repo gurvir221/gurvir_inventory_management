@@ -1,16 +1,6 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardActions,
-  Button,
-} from "@mui/material";
-
-interface StatCardProps {
-  title: string;
-  value: number | string;
-}
+import { Card, CardContent, Typography } from "@mui/material";
+import { StatCardProps } from "../interfaces/interface";
 
 export const StatCard: React.FC<StatCardProps> = ({ title, value }) => {
   return (
