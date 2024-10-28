@@ -17,7 +17,9 @@ const InventoryData = () => {
     productData
       .reduce(
         (total, product) =>
-          total + parseFloat(product.value.replace(/[^0-9.-]+/g, "")),
+          total +
+          product.quantity *
+            parseFloat(product.price.replace(/[^0-9.-]+/g, "")),
         0
       )
       .toFixed(2);

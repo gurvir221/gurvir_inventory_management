@@ -92,9 +92,17 @@ export const Modal: React.FC<ModalProps> = ({
             />
             <LabeledInput
               label="Value"
-              value={currentProduct.value}
+              value={
+                currentProduct.price
+                  ? `$${
+                      parseFloat(currentProduct.price.replace("$", "")) *
+                      currentProduct.quantity
+                    }`
+                  : "$0"
+              }
               onChange={handleChange}
               name="value"
+              isDisable={true}
             />
           </Grid2>
         )}

@@ -212,10 +212,16 @@ const InventoryTable: React.FC<ProductTableProps> = ({ isUserPresent }) => {
                   <TableCell>
                     {disabledRows[index] ? (
                       <Typography variant="body2" color="text.secondary">
-                        {product.value}
+                        {`$${
+                          parseFloat(product.price.replace("$", "")) *
+                          product.quantity
+                        }`}
                       </Typography>
                     ) : (
-                      product.value
+                      `$${
+                        parseFloat(product.price.replace("$", "")) *
+                        product.quantity
+                      }`
                     )}
                   </TableCell>
                   <TableCell>

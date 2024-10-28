@@ -1,13 +1,7 @@
 import { Product, State } from '../interfaces/interface';
 
 const initialState: State = {
-  productData: [{
-    category: "",
-    price: "",
-    quantity: 0,
-    value: "",
-    name: ""
-  }],
+  productData: [],
   totalProducts: 0,
   totalValue: 0,
   outOfStock: 0,
