@@ -1,14 +1,25 @@
-// const initialState = {
-//     totalProducts : 0,
-//     totalStoreValue: 0,
-//     outOfStock: 0,
-//     noOfCategory: 0
-// }
+import { Product, State } from '../interfaces/interface';
 
-export {};
+const initialState: State = {
+  productData: [],
+  totalProducts: 0,
+  totalValue: 0,
+  outOfStock: 0,
+  categories: new Set(),
+};
 
-// const reducer = () => {
-//     return ()
-// }
+type Action = { type: 'SET_PRODUCTS'; payload: Product[] }
 
-// export default reducer;
+export const reducer = (state = initialState, action: Action): State => {
+  switch (action.type) {
+    case 'SET_PRODUCTS':
+        return {
+          ...state,
+          productData: action.payload
+        };
+    default:
+      return state;
+  }
+};
+
+export default reducer;

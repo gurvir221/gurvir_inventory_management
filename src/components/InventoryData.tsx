@@ -1,10 +1,15 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import { ProductDataProps } from "../interfaces/interface";
 import { StatCard } from "./StatCard";
 import "../styles/InventoryData.scss";
+import { Product } from "../interfaces/interface";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
-const InventoryData: React.FC<ProductDataProps> = ({ productData }) => {
+const InventoryData = () => {
+  const productData: Product[] = useSelector(
+    (state: RootState) => state.productData
+  );
   const totalProduct = productData ? productData.length : 0;
 
   const totalStoreValue =

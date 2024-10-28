@@ -12,12 +12,18 @@ export interface ProductDataProps {
 
 export interface ProductTableProps {
     isUserPresent: boolean
-    productData: Product[]
-    setProductData: React.Dispatch<React.SetStateAction<Product[]>>
 }
 
 export interface StatCardProps {
     title: string;
     value: number | string;
+}
+
+export interface State {
+    productData: Product[];
+    totalProducts: number;
+    totalValue: number;
+    outOfStock: number;
+    categories: Set<string>;
 }
   

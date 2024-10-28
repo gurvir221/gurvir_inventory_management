@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../src/components/NavBar";
 import InventoryData from "./components/InventoryData";
 import InventoryTable from "./components/InventoryTable";
-import { getData } from "./api";
 import { Product } from "./interfaces/interface";
 import "./App.css";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./redux/asyncActions";
 
 function App() {
+  const dispatch: any = useDispatch();
   const [isUserPresent, setIsUserPresent] = useState<boolean>(false);
   const [productData, setProductData] = useState<Product[]>([]);
 
   useEffect(() => {
-    getData().then((data) => setProductData(data));
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <>
@@ -23,12 +25,8 @@ function App() {
           setIsUserPresent={setIsUserPresent}
         />
       </div>
-      <InventoryData productData={productData} />
-      <InventoryTable
-        isUserPresent={isUserPresent}
-        productData={productData}
-        setProductData={setProductData}
-      />
+      <InventoryData />
+      <InventoryTable isUserPresent={isUserPresent} />
     </>
   );
 }

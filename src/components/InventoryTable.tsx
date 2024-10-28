@@ -12,7 +12,6 @@ import {
   DialogActions,
   Button,
   Grid2,
-  TextField,
   Typography,
   Table,
   TableBody,
@@ -26,6 +25,10 @@ import {
 import "../styles/InventoryTable.scss";
 import { ProductTableProps, Product } from "../interfaces/interface";
 import { styled } from "@mui/material/styles";
+import LabeledInput from "./LabeledInput";
+import { useSelector, useDispatch } from "react-redux";
+import { editProduct, setProducts } from "../redux/actions";
+import { RootState } from "../redux/store";
 
 const IconWrapper = styled("div")<{ marked: boolean }>(({ marked }) => ({
   position: "relative",
@@ -44,11 +47,7 @@ const IconWrapper = styled("div")<{ marked: boolean }>(({ marked }) => ({
     : {},
 }));
 
-const InventoryTable: React.FC<ProductTableProps> = ({
-  isUserPresent,
-  productData,
-  setProductData,
-}) => {
+const InventoryTable: React.FC<ProductTableProps> = ({ isUserPresent }) => {
   const [openModal, setOpenModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product>();
   const [disabledEditIcons, setDisabledEditIcons] = useState<{
@@ -57,9 +56,13 @@ const InventoryTable: React.FC<ProductTableProps> = ({
   const [crossedEyeIcons, setCrossedEyeIcons] = useState<{
     [key: number]: boolean;
   }>({});
+  const productData: Product[] = useSelector(
+    (state: RootState) => state.productData
+  );
   const [disabledRows, setDisabledRows] = useState<boolean[]>(
     Array(productData.length).fill(false)
   );
+  const dispatch = useDispatch();
 
   const handleEditIcon = (product: Product) => {
     setCurrentProduct(product);
@@ -68,13 +71,13 @@ const InventoryTable: React.FC<ProductTableProps> = ({
 
   const handleSave = () => {
     if (currentProduct) {
-      setProductData(
-        (prevData) =>
-          prevData &&
-          prevData.map((product) =>
-            product.name === currentProduct.name ? currentProduct : product
-          )
-      );
+      // setProductData(
+      //   (prevData) =>
+      //     prevData &&
+      //     prevData.map((product) =>
+      //       product.name === currentProduct.name ? currentProduct : product
+      //     )
+      // );
       handleClose();
     }
   };
@@ -94,7 +97,7 @@ const InventoryTable: React.FC<ProductTableProps> = ({
 
   const handleDeleteIcon = (index: number) => {
     const updatedProductData = productData.filter((_, i) => i !== index);
-    setProductData(updatedProductData);
+    dispatch(setProducts(updatedProductData));
   };
 
   const handleDisableIcon = (index: number) => {
@@ -315,50 +318,26 @@ const InventoryTable: React.FC<ProductTableProps> = ({
         <DialogContent style={{ overflow: "hidden" }}>
           {currentProduct && (
             <Grid2 container spacing={2}>
-              <Grid2 component="div">
-                <Typography variant="subtitle2" gutterBottom>
-                  Category
-                </Typography>
-                <TextField
-                  fullWidth
-                  label={currentProduct.category}
-                  variant="outlined"
-                  onChange={handleChange}
-                />
-              </Grid2>
-              <Grid2 component="div">
-                <Typography variant="subtitle2" gutterBottom>
-                  Price
-                </Typography>
-                <TextField
-                  fullWidth
-                  label={currentProduct.price}
-                  variant="outlined"
-                  onChange={handleChange}
-                />
-              </Grid2>
-              <Grid2 component="div">
-                <Typography variant="subtitle2" gutterBottom>
-                  Quantity
-                </Typography>
-                <TextField
-                  fullWidth
-                  label={currentProduct.quantity}
-                  variant="outlined"
-                  onChange={handleChange}
-                />
-              </Grid2>
-              <Grid2 component="div">
-                <Typography variant="subtitle2" gutterBottom>
-                  Value
-                </Typography>
-                <TextField
-                  fullWidth
-                  label={currentProduct.value}
-                  variant="outlined"
-                  onChange={handleChange}
-                />
-              </Grid2>
+              <LabeledInput
+                label="Category"
+                value={currentProduct.category}
+                onChange={handleChange}
+              />
+              <LabeledInput
+                label="Price"
+                value={currentProduct.price}
+                onChange={handleChange}
+              />
+              <LabeledInput
+                label="Quantity"
+                value={currentProduct.quantity}
+                onChange={handleChange}
+              />
+              <LabeledInput
+                label="Value"
+                value={currentProduct.value}
+                onChange={handleChange}
+              />
             </Grid2>
           )}
         </DialogContent>
