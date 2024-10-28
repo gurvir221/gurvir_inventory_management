@@ -2,16 +2,9 @@ import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from "@mui/icons-material/Close";
 
 import {
   IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  Grid2,
   Typography,
   Table,
   TableBody,
@@ -25,10 +18,10 @@ import {
 import "../styles/InventoryTable.scss";
 import { ProductTableProps, Product } from "../interfaces/interface";
 import { styled } from "@mui/material/styles";
-import LabeledInput from "./LabeledInput";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../redux/actions";
 import { RootState } from "../redux/store";
+import { Modal } from "../components/Modal";
 
 const IconWrapper = styled("div")<{ marked: boolean }>(({ marked }) => ({
   position: "relative",
@@ -67,32 +60,6 @@ const InventoryTable: React.FC<ProductTableProps> = ({ isUserPresent }) => {
   const handleEditIcon = (product: Product) => {
     setCurrentProduct(product);
     setOpenModal(true);
-  };
-
-  const handleSave = () => {
-    if (currentProduct) {
-      // setProductData(
-      //   (prevData) =>
-      //     prevData &&
-      //     prevData.map((product) =>
-      //       product.name === currentProduct.name ? currentProduct : product
-      //     )
-      // );
-      handleClose();
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (currentProduct) {
-      setCurrentProduct({
-        ...currentProduct,
-        [e.target.name]: e.target.value,
-      });
-    }
-  };
-
-  const handleClose = () => {
-    setOpenModal(false);
   };
 
   const handleDeleteIcon = (index: number) => {
@@ -292,64 +259,13 @@ const InventoryTable: React.FC<ProductTableProps> = ({ isUserPresent }) => {
         </Table>
       </TableContainer>
 
-      <Dialog
-        open={openModal}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            width: "600px",
-            maxWidth: "90%",
-          },
-        }}
-      >
-        <DialogTitle>Edit Product</DialogTitle>
-        <IconButton
-          edge="end"
-          color="inherit"
-          onClick={handleClose}
-          aria-label="close"
-          style={{ position: "absolute", right: 12, top: 15 }}
-        >
-          <CloseIcon />
-        </IconButton>
-        <div className="description">
-          {currentProduct && currentProduct.name}
-        </div>
-        <DialogContent style={{ overflow: "hidden" }}>
-          {currentProduct && (
-            <Grid2 container spacing={2}>
-              <LabeledInput
-                label="Category"
-                value={currentProduct.category}
-                onChange={handleChange}
-              />
-              <LabeledInput
-                label="Price"
-                value={currentProduct.price}
-                onChange={handleChange}
-              />
-              <LabeledInput
-                label="Quantity"
-                value={currentProduct.quantity}
-                onChange={handleChange}
-              />
-              <LabeledInput
-                label="Value"
-                value={currentProduct.value}
-                onChange={handleChange}
-              />
-            </Grid2>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        currentProduct={currentProduct}
+        setCurrentProduct={setCurrentProduct}
+        productData={productData}
+      />
     </>
   );
 };

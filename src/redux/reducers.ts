@@ -1,7 +1,13 @@
 import { Product, State } from '../interfaces/interface';
 
 const initialState: State = {
-  productData: [],
+  productData: [{
+    category: "",
+    price: "",
+    quantity: 0,
+    value: "",
+    name: ""
+  }],
   totalProducts: 0,
   totalValue: 0,
   outOfStock: 0,
@@ -10,7 +16,7 @@ const initialState: State = {
 
 type Action = { type: 'SET_PRODUCTS'; payload: Product[] }
 
-export const reducer = (state = initialState, action: Action): State => {
+const reducer = (state = initialState, action: Action): State => {
   switch (action.type) {
     case 'SET_PRODUCTS':
         return {

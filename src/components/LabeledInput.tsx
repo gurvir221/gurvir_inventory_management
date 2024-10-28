@@ -7,12 +7,14 @@ interface LabeledInputProps {
   label: string;
   value: string | number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
 }
 
 const LabeledInput: React.FC<LabeledInputProps> = ({
   label,
   value,
   onChange,
+  name,
 }) => {
   return (
     <Grid component="div">
@@ -24,6 +26,7 @@ const LabeledInput: React.FC<LabeledInputProps> = ({
         label={value}
         variant="outlined"
         onChange={onChange}
+        name={name}
       />
     </Grid>
   );

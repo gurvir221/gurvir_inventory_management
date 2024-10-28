@@ -6,10 +6,6 @@ export interface Product {
     price: string
 }
 
-export interface ProductDataProps {
-    productData: Product[]
-}
-
 export interface ProductTableProps {
     isUserPresent: boolean
 }
@@ -25,5 +21,13 @@ export interface State {
     totalValue: number;
     outOfStock: number;
     categories: Set<string>;
+}
+
+export interface ModalProps {
+    openModal: boolean
+    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+    currentProduct: Product | undefined
+    setCurrentProduct: React.Dispatch<React.SetStateAction<Product | undefined>>
+    productData: Product[]
 }
   
