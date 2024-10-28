@@ -10,7 +10,6 @@ import { fetchProducts } from "./redux/asyncActions";
 function App() {
   const dispatch: any = useDispatch();
   const [isUserPresent, setIsUserPresent] = useState<boolean>(false);
-  const [productData, setProductData] = useState<Product[]>([]);
 
   useEffect(() => {
     dispatch(fetchProducts());

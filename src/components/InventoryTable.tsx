@@ -27,7 +27,7 @@ import { ProductTableProps, Product } from "../interfaces/interface";
 import { styled } from "@mui/material/styles";
 import LabeledInput from "./LabeledInput";
 import { useSelector, useDispatch } from "react-redux";
-import { editProduct, setProducts } from "../redux/actions";
+import { setProducts } from "../redux/actions";
 import { RootState } from "../redux/store";
 
 const IconWrapper = styled("div")<{ marked: boolean }>(({ marked }) => ({
