@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../src/components/NavBar";
 import InventoryData from "./components/InventoryData";
 import InventoryTable from "./components/InventoryTable";
-import { Product } from "./interfaces/interface";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/asyncActions";
